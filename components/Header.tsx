@@ -1,6 +1,7 @@
 import {
   CloudDownload,
   CloudUpload,
+  RefreshCw,
   Server,
   Trophy,
 } from "lucide-react";
@@ -11,6 +12,7 @@ type HeaderProps = {
   onOpenDatabase: () => void;
   onSaveCloud: () => void;
   onLoadCloud: () => void;
+  onRefresh: () => void;
 };
 
 export default function Header({
@@ -19,6 +21,7 @@ export default function Header({
   onOpenDatabase,
   onSaveCloud,
   onLoadCloud,
+  onRefresh,
 }: HeaderProps) {
   return (
     <header className="relative overflow-hidden bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white shadow-lg">
@@ -71,6 +74,14 @@ export default function Header({
             >
               <CloudUpload className="h-4 w-4" />
               {isSyncing ? "Memproses..." : "Simpan Cloud"}
+            </button>
+            <button
+              onClick={onRefresh}
+              title="Muat ulang halaman; data lokal di browser tetap tersimpan"
+              className="flex items-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white/20"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Refresh
             </button>
           </div>
         </div>

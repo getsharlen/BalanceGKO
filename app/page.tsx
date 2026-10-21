@@ -371,6 +371,7 @@ export default function HomePage() {
         onOpenDatabase={() => setIsDbModalOpen(true)}
         onSaveCloud={() => void syncCloud("save")}
         onLoadCloud={() => void syncCloud("load")}
+        onRefresh={() => window.location.reload()}
       />
 
       {toast && (
@@ -398,16 +399,34 @@ export default function HomePage() {
               onDownloadTemplate={() => void downloadTemplate()}
               onLoadSample={() => {
                 setParticipants(INITIAL_SAMPLE);
+                setTeams([]);
+                setRemainder([]);
                 notify("Data sampel berhasil dimuat.", "success");
               }}
-              onReset={() => setParticipants([])}
-            />
+              onReset={() => {
+                if (!window.confirm("Hapus semua peserta dari data lokal?")) return;
+                setParticipants([]);
+                setTeams([]);
+                setRemainder([]);
+                notify("Semua peserta lokal berhasil dihapus.", "success");
+              }}
+              />
             <TeamConfig
               splitMode={splitMode}
               targetValue={targetValue}
               onSplitModeChange={setSplitMode}
               onTargetValueChange={setTargetValue}
               onGenerate={generateTeams}
+              hasTeams={teams.length > 0}
+              onReset={() => {
+                if (!teams.length) return;
+                setTeams([]);
+                setRemainder([]);
+                notify(
+                  "Hasil pengacakan direset. Data peserta tetap tersimpan.",
+                  "success",
+                );
+              }}
             />
           </section>
 

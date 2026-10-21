@@ -87,7 +87,7 @@ export default function ParticipantTable({
           className="flex items-center justify-center gap-1 rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-600 transition hover:bg-red-100"
         >
           <Trash2 className="h-3.5 w-3.5" />
-          Reset
+          Hapus Peserta
         </button>
       </div>
     </section>

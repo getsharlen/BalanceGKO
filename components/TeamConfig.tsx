@@ -1,4 +1,4 @@
-import { ShieldAlert, Shuffle, Sliders } from "lucide-react";
+import { RotateCcw, ShieldAlert, Shuffle, Sliders } from "lucide-react";
 
 export type SplitMode = "by-teams" | "by-members";
 
@@ -8,6 +8,8 @@ type TeamConfigProps = {
   onSplitModeChange: (mode: SplitMode) => void;
   onTargetValueChange: (value: number) => void;
   onGenerate: () => void;
+  hasTeams: boolean;
+  onReset: () => void;
 };
 
 export default function TeamConfig({
@@ -16,6 +18,8 @@ export default function TeamConfig({
   onSplitModeChange,
   onTargetValueChange,
   onGenerate,
+  hasTeams,
+  onReset,
 }: TeamConfigProps) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -108,6 +112,14 @@ export default function TeamConfig({
       >
         <Shuffle className="h-5 w-5" />
         ACAK &amp; SEIMBANGKAN TIM SEKARANG
+      </button>
+      <button
+        onClick={onReset}
+        disabled={!hasTeams}
+        className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <RotateCcw className="h-4 w-4" />
+        Reset Hasil Tim
       </button>
     </section>
   );
